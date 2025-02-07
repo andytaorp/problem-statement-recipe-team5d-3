@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost/recipedb', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://johnmiyahar:<db_password>@mernapp.ds7jm.mongodb.net/?retryWrites=true&w=majority&appName=MERNapp', { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.post('/api/auth/signup', async (req, res) => {
   const { email, password } = req.body;
