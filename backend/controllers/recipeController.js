@@ -22,18 +22,24 @@ const getRecipe = async (req, res) => {
 
 // Create a new recipe
 const createRecipe = async (req, res) => {
-  const { title, reps, load } = req.body;
+  const { name, ingredients, instructions, preptime, difficulty } = req.body;
 
   let emptyFields = [];
 
-  if (!title) {
-    emptyFields.push("title");
+  if (!name) {
+    emptyFields.push("name");
   }
-  if (!reps) {
-    emptyFields.push("reps");
+  if (!ingredients) {
+    emptyFields.push("ingredients");
   }
-  if (!load) {
-    emptyFields.push("load");
+  if (!instructions) {
+    emptyFields.push("instructions");
+  }
+  if (!preptime) {
+    emptyFields.push("preptime");
+  }
+  if (!difficulty) {
+    emptyFields.push("difficulty");
   }
 
   if (emptyFields.length > 0) {
@@ -43,7 +49,7 @@ const createRecipe = async (req, res) => {
   }
 
   try {
-    const recipe = await Recipe.create({ title, reps, load });
+    const recipe = await Recipe.create({ name, ingredients, instructions, preptime, difficulty });
     res.status(200).json(recipe);
   } catch (error) {
     res.status(400).json({ error: error.message });

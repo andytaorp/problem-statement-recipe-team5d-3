@@ -1,23 +1,26 @@
 const mongoose = require('mongoose');
 
 const recipeSchema = new mongoose.Schema({
-  title: {
+  name: {
     type: String,
     required: true
   },
-  load: {
+  ingredients: {
+    type: String,
+    required: true
+  },
+  instructions: {
+    type: String,
+    required: true
+  },
+  preptime: {
     type: Number,
     required: true
   },
-  reps: {
-    type: Number,
-    required: true
-  },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+  difficulty: {
+    type: String,
     required: true
   }
 });
 
-module.exports = mongoose.model('Recipe', workoutSchema);
+module.exports = mongoose.model('Recipe', recipeSchema);
