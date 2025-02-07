@@ -1,27 +1,27 @@
-const Workout = require("../models/workoutModel");
+const Recipe = require("../models/recipeModel");
 const mongoose = require("mongoose");
 
-// Get all workouts
-const getWorkouts = async (req, res) => {
-  const workouts = await Workout.find({}).sort({ createdAt: -1 }); // descending order
-  res.status(200).json(workouts);
+// Get all recipes
+const getRecipes = async (req, res) => {
+  const recipes = await Recipe.find({}).sort({ createdAt: -1 }); // descending order
+  res.status(200).json(recipes);
 };
 
-// Get a single workout
-const getWorkout = async (req, res) => {
+// Get a single recipe
+const getRecipe = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "Invalid ID" });
   }
-  const workout = await Workout.findById(id);
-  if (!workout) {
-    return res.status(404).json({ error: "Workout not found" });
+  const recipe = await Workout.findById(id);
+  if (!recipe) {
+    return res.status(404).json({ error: "Recipe not found" });
   }
-  res.status(200).json(workout);
+  res.status(200).json(recipe);
 };
 
-// Create a new workout
-const createWorkout = async (req, res) => {
+// Create a new recipe
+const createRecipe = async (req, res) => {
   const { title, reps, load } = req.body;
 
   let emptyFields = [];
@@ -43,48 +43,48 @@ const createWorkout = async (req, res) => {
   }
 
   try {
-    const workout = await Workout.create({ title, reps, load });
-    res.status(200).json(workout);
+    const recipe = await Recipe.create({ title, reps, load });
+    res.status(200).json(recipe);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-// Delete a workout
-const deleteWorkout = async (req, res) => {
+// Delete a recipe
+const deleteRecipe = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "Invalid ID" });
   }
-  const workout = await Workout.findOneAndDelete({ _id: id });
-  if (!workout) {
-    return res.status(400).json({ error: "Workout not found" });
+  const recipe = await Recipe.findOneAndDelete({ _id: id });
+  if (!recipe) {
+    return res.status(400).json({ error: "Recipe not found" });
   }
-  res.status(200).json(workout);
+  res.status(200).json(recipe);
 };
 
-// Update a workout
-const updateWorkout = async (req, res) => {
+// Update a recipe
+const updateRecipe = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "Invalid ID" });
   }
-  const workout = await Workout.findOneAndUpdate(
+  const recipe = await Recipe.findOneAndUpdate(
     { _id: id },
     {
       ...req.body,
     }
   );
-  if (!workout) {
-    return res.status(400).json({ error: "Workout not found" });
+  if (!recipe) {
+    return res.status(400).json({ error: "Recipe not found" });
   }
-  res.status(200).json(workout);
+  res.status(200).json(recipe);
 };
 
 module.exports = {
-  getWorkouts,
-  getWorkout,
-  createWorkout,
-  deleteWorkout,
-  updateWorkout,
+  getRecipes,
+  getRecipe,
+  createRecipe,
+  deleteRecipe,
+  updateRecipe,
 };
