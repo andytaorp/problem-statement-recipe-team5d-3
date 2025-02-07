@@ -1,11 +1,11 @@
 const express = require("express");
 const {
-  getWorkouts,
-  getWorkout,
-  createWorkout,
-  deleteWorkout,
-  updateWorkout,
-} = require("../controllers/workoutController");
+  getRecipes,
+  getRecipe,
+  createRecipe,
+  deleteRecipe,
+  updateRecipe,
+} = require("../controllers/recipeController");
 
 const router = express.Router();
 
@@ -15,18 +15,18 @@ router.use(requireAuth);
 
 
 // Get all workouts
-router.get("/", getWorkouts);
+router.get("/", getRecipes);
 
 // Get a single workout
-router.get("/:id", getWorkout);
+router.get("/:id", getRecipe);
 
 // Post a new workout
-router.post("/", createWorkout);
+router.post("/", createRecipe);
 
 // Delete a workout
-router.delete("/:id", deleteWorkout);
+router.delete("/:id", deleteRecipe);
 
 // Update a workout
-router.patch("/:id", updateWorkout);
+router.patch("/:id", updateRecipe);
 
 module.exports = router;
