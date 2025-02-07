@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { useRecipeContext } from '../hooks/useRecipeContext'
+import { useRecipesContext } from '../hooks/useRecipesContext'
 
 const RecipeForm = () => {
-  const { dispatch } = useRecipeContext()
+  const { dispatch } = useRecipesContext()
 
   const [name, setName] = useState('')
   const [ingredients, setIngredients] = useState('')
