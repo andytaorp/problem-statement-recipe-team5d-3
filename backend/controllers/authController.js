@@ -3,10 +3,10 @@ const signupUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const userExists = await User.findOne({ email });
+    const userExists = await user.findOne({ email });
     if (userExists) return res.status(400).json({ error: "Email already exists" });
 
-    const user = await User.create({ email, password });
+    const user = await user.create({ email, password });
     const token = createToken(user._id);
     res.status(201).json({ email, token });
   } catch (error) {
@@ -19,7 +19,7 @@ const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await user.findOne({ email });
     if (!user) return res.status(404).json({ error: "Invalid credentials" });
 
     const isMatch = await bcrypt.compare(password, user.password);
