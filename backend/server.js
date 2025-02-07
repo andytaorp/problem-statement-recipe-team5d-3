@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const User = require('./models/userModel');
-const Workout = require('./models/workoutModel');
+const Recipe = require('./models/recipeModel');
 const requireAuth = require('./middleware/requireAuth');
 
 dotenv.config();
@@ -48,33 +48,33 @@ app.post('/api/auth/login', async (req, res) => {
   res.status(200).send({ token });
 });
 
-app.post('/api/workouts', requireAuth, async (req, res) => {
-  const { title, load, reps } = req.body;
+app.post('/api/recipes', requireAuth, async (req, res) => {
+  const { name, ingredients, instructions, prepTime, difficulty } = req.body;
   const userId = req.userId;
 
-  const workout = new Workout({ title, load, reps, userId });
-  await workout.save();
-  res.status(201).send(workout);
+  const recipe = new Recipe({ name, ingredients, instructions, prepTime, difficulty, userId });
+  await recipe.save();
+  res.status(201).send(recipe);
 });
 
-app.get('/api/workouts', requireAuth, async (req, res) => {
+app.get('/api/recipes', requireAuth, async (req, res) => {
   const userId = req.userId;
 
-  const workouts = await Workout.find({ userId });
-  res.status(200).send(workouts);
+  const recipes = await Recipe.find({ userId });
+  res.status(200).send(recipes);
 });
 
-app.delete('/api/workouts/:id', requireAuth, async (req, res) => {
+app.delete('/api/recipes/:id', requireAuth, async (req, res) => {
   const userId = req.userId;
-  const workoutId = req.params.id;
+  const recipeId = req.params.id;
 
-  const workout = await Workout.findOne({ _id: workoutId, userId });
-  if (!workout) {
-    return res.status(404).send({ error: 'Workout not found or not authorized' });
+  const recipe = await Recipe.findOne({ _id: recipeId, userId });
+  if (!recipe) {
+    return res.status(404).send({ error: 'Recipe not found or not authorized' });
   }
 
-  await Workout.deleteOne({ _id: workoutId });
-  res.status(200).send({ message: 'Workout deleted' });
+  await Recipe.deleteOne({ _id: recipeId });
+  res.status(200).send({ message: 'Recipe deleted' });
 });
 
 const PORT = process.env.PORT || 4000;
