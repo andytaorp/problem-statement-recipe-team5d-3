@@ -49,10 +49,10 @@ app.post('/api/auth/login', async (req, res) => {
 });
 
 app.post('/api/recipes', requireAuth, async (req, res) => {
-  const { title, load, reps } = req.body;
+  const { name, ingredients, instructions, preptime, difficulty } = req.body;
   const userId = req.userId;
 
-  const recipe = new Recipe({ title, load, reps, userId });
+  const recipe = new Recipe({ name, ingredients, instructions, preptime, difficulty, userId });
   await recipe.save();
   res.status(201).send(recipe);
 });
