@@ -49,7 +49,7 @@ const createRecipe = async (req, res) => {
   }
 
   try {
-    const recipe = await Recipe.create({ title, reps, load });
+    const recipe = await Recipe.create({ name, ingredients, instructions, preptime, difficulty });
     res.status(200).json(recipe);
   } catch (error) {
     res.status(400).json({ error: error.message });
