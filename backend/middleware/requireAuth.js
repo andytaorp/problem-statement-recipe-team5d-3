@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-const jwt = require('jsonwebtoken');
-
-const requireAuth = (req, res, next) => {
-  const token = req.header('Authorization').replace('Bearer ', '');
-  
-  if (!token) {
-    return res.status(401).send({ error: 'Authentication required' });
-  }
-
-  jwt.verify(token, 'yourSecretKey', (err, decoded) => {
-    if (err) {
-      return res.status(401).send({ error: 'Invalid Token' });
-    }
-    req.userId = decoded.id;
-    next();
-  });
-=======
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
@@ -32,7 +14,6 @@ const requireAuth = async (req, res, next) => {
   } catch (error) {
     res.status(401).json({ error: "Invalid token" });
   }
->>>>>>> ab6898f05c23b8b87630bac4c366c0477efbad0f
 };
 
 module.exports = requireAuth;
