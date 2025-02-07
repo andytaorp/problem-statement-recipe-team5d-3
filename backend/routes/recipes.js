@@ -13,20 +13,19 @@ const requireAuth = require("../middleware/requireAuth");
 
 router.use(requireAuth);
 
-
-// Get all workouts
+// Get all recipes
 router.get("/", getRecipes);
 
-// Get a single workout
+// Get a single recipe
 router.get("/:id", getRecipe);
 
-// Post a new workout
+// Post a new recipe
 router.post("/", createRecipe);
 
-// Delete a workout
+// Delete a recipe
 router.delete("/:id", deleteRecipe);
 
-// Update a workout
+// Update a recipe
 router.patch("/:id", updateRecipe);
 
 module.exports = router;

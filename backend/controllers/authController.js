@@ -1,12 +1,3 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const User = require("../models/userModel");
-
-// Generate JWT token
-const createToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "3d" });
-};
-
 // Sign-Up Controller
 const signupUser = async (req, res) => {
   const { email, password } = req.body;

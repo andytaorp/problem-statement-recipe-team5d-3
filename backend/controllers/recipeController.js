@@ -13,7 +13,7 @@ const getRecipe = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "Invalid ID" });
   }
-  const recipe = await Workout.findById(id);
+  const recipe = await Recipe.findById(id);
   if (!recipe) {
     return res.status(404).json({ error: "Recipe not found" });
   }

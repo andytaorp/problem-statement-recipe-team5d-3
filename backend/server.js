@@ -60,7 +60,7 @@ app.post('/api/recipes', requireAuth, async (req, res) => {
 app.get('/api/recipes', requireAuth, async (req, res) => {
   const userId = req.userId;
 
-  const recipes = await recipes.find({ userId });
+  const recipes = await Recipe.find({ userId });
   res.status(200).send(recipes);
 });
 
