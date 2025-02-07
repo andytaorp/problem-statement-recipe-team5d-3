@@ -1,10 +1,10 @@
-import { useRecipeContext } from '../hooks/useRecipeContext'
+import { useRecipesContext } from '../hooks/useRecipesContext'
 
 // date-fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const RecipeDetails = ({ recipe }) => {
-  const { dispatch } = useRecipeContext()
+  const { dispatch } = useRecipesContext()
 
   const handleClick = async () => {
     const response = await fetch(
