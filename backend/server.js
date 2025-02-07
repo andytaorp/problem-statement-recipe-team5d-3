@@ -12,6 +12,7 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+require('dotenv').config(); 
 
 mongoose.connect('mongodb+srv://johnmiyahar:<db_password>@mernapp.ds7jm.mongodb.net/?retryWrites=true&w=majority&appName=MERNapp', { useNewUrlParser: true, useUnifiedTopology: true });
 
